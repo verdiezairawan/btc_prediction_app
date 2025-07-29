@@ -22,18 +22,17 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Run finetuning and prediction script
+      - name: Run finetuning and update history
         run: |
           python finetuning.py
-          python app.py # Jalankan app.py untuk membuat/memperbarui history
-      
+          python update_history.py
+
       - name: Commit and push changes
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          # Tambahkan prediction_history.csv ke daftar file yang akan di-commit
           git add model_finetuned_btc_2025.h5 scaler_finetuned.save prediction_history.csv
-          
+
           if git diff --staged --quiet; then
             echo "No changes to commit."
           else
