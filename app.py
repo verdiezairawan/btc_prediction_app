@@ -28,12 +28,13 @@ try:
     X_input = np.array([scaled_data]).reshape((1, 60, 1))
     pred_scaled = model.predict(X_input)
     predicted_price = scaler.inverse_transform(pred_scaled)[0, 0]
-    
+
     # Tampilkan hasil
-    prediction_date = pd.to_datetime("today").date() + pd.DateOffset(days=1).date()
+    # --- PERBAIKAN KODE DI BARIS INI ---
+    prediction_date = (pd.to_datetime("today") + pd.DateOffset(days=1)).date()
     harga_kemarin = df_input['Close'].iloc[-1]
 
-    st.success(f"Prediksi berhasil dibuat!")
+    st.success("Prediksi berhasil dibuat!")
     st.metric(
         label=f"Prediksi Harga BTC untuk {prediction_date.strftime('%d %B %Y')}",
         value=f"${predicted_price:,.2f}",
