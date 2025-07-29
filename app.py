@@ -65,3 +65,34 @@ st.metric("Harga Prediksi (USD)", f"${predicted_price:,.2f}")
 
 print("Predicted scaled shape:", pred_scaled.shape)
 print("Predicted scaled value:", pred_scaled)
+
+# ... (kode bagian atas) ...
+
+# --- Tata Letak dengan Kolom ---
+col1, col2 = st.columns(2)
+
+with col1:
+    st.subheader("Pilih Tanggal Prediksi")
+    prediction_date = st.date_input(
+        "Tanggal",
+        value=pd.to_datetime("today") + pd.DateOffset(days=1),
+        min_value=pd.to_datetime("today") + pd.DateOffset(days=1)
+    )
+
+# ... (kode untuk prediksi tetap sama) ...
+
+with col2:
+    st.subheader("Hasil Prediksi")
+    # Pindahkan kode st.metric dari atas ke sini
+    st.metric(
+        label=f"Prediksi Harga BTC ({prediction_date.strftime('%d %B %Y')})",
+        value=f"${predicted_price:,.2f}",
+        delta=f"${perubahan_harga:,.2f} vs kemarin"
+    )
+
+# Tampilkan grafik di bawah kolom
+st.subheader("Grafik Harga Penutupan 60 Hari Terakhir")
+st.line_chart(df['Close'])
+
+# Tambahkan catatan kaki atau penjelasan model
+st.info("Model yang digunakan adalah TCN–BiLSTM–GRU yang di-fine-tune setiap hari.")
