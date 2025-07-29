@@ -2,8 +2,8 @@ streamlit
 yfinance
 pandas
 numpy
-joblib
-tensorflow
 scikit-learn
+joblib
+tensorflow-cpu
 tcn
 h5py
