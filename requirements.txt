@@ -1,9 +1,10 @@
+python==3.11
 streamlit
 yfinance
 pandas
 numpy
 scikit-learn
 joblib
-tensorflow-cpu
+tensorflow-cpu==2.16.1
 tcn
 h5py
